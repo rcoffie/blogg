@@ -11,21 +11,21 @@
         <div class="card-body">
           <h4 class="card-title">{{post.title}}</h4>
           <p class="card-text">{{post.body}}</p>
-          <p class="card-text"><small class="text-muted"> By  {{post.author }}    </small></p>
+          <p class="card-text"><small class="text-muted"> By  {{post.author.username }}    </small></p>
           <p class="card-text"><small class="text-muted">{{ post.created| naturaltime }}</small></p>
            
           <div class=" clearfix">
-            <form action="{% url '" method="POST">
+            <form action="{% url 'post:likes' post.id %}" method="POST">
               {% csrf_token %}
-
-            {% if request.user is authenticated  %}
-             <button type="submit" value="" name="post_id" class="btn btn-primary float-start" ><i class="bi bi-hand-thumbs-up" ></i> {{likes}}</button>
+              
+             
+             {% if user.is_authenticated %}
+             <button type="submit" value="{{post.id}}" name="post_id" class="btn btn-primary float-start" ><i class="bi bi-hand-thumbs-up" ></i> {{likes}}</button>
              {% else %}
-            <button type="submit" value="{{post.id}}" name="post_id" class="btn btn-primary float-start" disabled><i class="bi bi-hand-thumbs-up"></i> {{likes}}</button>
 
-            {% endif %}
-
-            </form>
+             <button type="submit" value="{{post.id}}" name="post_id" class="btn btn-primary float-start"disabled><i class="bi bi-hand-thumbs-up" ></i> {{likes}}</button>
+             {% endif %}
+             </form>
             
            <!--  <form action="" method="POST">
             <button type="button" class="btn btn-primary float-end"> <i class="bi bi-hand-thumbs-down"></i> </button>
@@ -54,7 +54,7 @@
       <h5 class="card-header">{{ comments.count }} comment{{ comments|pluralize}}</h5>
       {% for comment in comments %}
       <div class="card-body">
-        <p> <strong> {{ comment.user }} </strong>  <small class="text-muted">{{ comment.comment_date | naturaltime  }} ago</small> </p>
+        <p> <strong> {{ comment.user.username }} </strong>  <small class="text-muted">{{ comment.created | naturaltime  }} </small> </p>
         <p class="card-text">{{ comment.content}}</p>
         <hr>
        
