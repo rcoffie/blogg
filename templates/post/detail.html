@@ -14,7 +14,7 @@
           <p class="card-text"><small class="text-muted"> By  {{post.author.username }}    </small></p>
           <p class="card-text"><small class="text-muted">{{ post.created| naturaltime }}</small></p>
            
-          <div class=" clearfix">
+          <!-- <div class=" clearfix">
             <form action="{% url 'post:likes' post.id %}" method="POST">
               {% csrf_token %}
               
@@ -25,6 +25,22 @@
 
              <button type="submit" value="{{post.id}}" name="post_id" class="btn btn-primary float-start"disabled><i class="bi bi-hand-thumbs-up" ></i> {{likes}}</button>
              {% endif %}
+             </form>
+            
+           <!--  <form action="" method="POST">
+            <button type="button" class="btn btn-primary float-end"> <i class="bi bi-hand-thumbs-down"></i> </button>
+          </form> -->
+          </div> -->
+
+
+          <div class=" clearfix">
+            <form action="{% url 'post:likes' post.id %}" method="POST">
+              {% csrf_token %}
+              
+             
+            
+             <button type="submit" value="{{post.id}}" name="post_id" class="btn btn-primary float-start" ><i class="bi bi-hand-thumbs-up" ></i> {{likes}}</button>
+         
              </form>
             
            <!--  <form action="" method="POST">
@@ -44,8 +60,12 @@
         <label for="exampleFormControlTextarea1" class="form-label" required>Post Comment</label>
         <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3" required></textarea>
       </div>
-
-      <button type="submit" class="btn btn-primary mb-3"> Comment</button>
+      {% if user.is_authenticated %}
+      
+      <button type="submit" class="btn btn-primary mb-3" > Comment</button>
+      {% else %}
+      <button type="submit" class="btn btn-primary mb-3" disabled> Comment</button>
+      {% endif %}
     </form>
 
 
