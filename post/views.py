@@ -23,6 +23,7 @@ def PostDetail(request, id):
   comments = Comment.objects.filter(post=post).order_by('-id')
   likes    = post.likes.count()
   context = {'post':post,'comments':comments,'likes':likes}
+  
   if request.method == 'POST':
     
     content = request.POST['content']

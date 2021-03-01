@@ -30,7 +30,7 @@
            <!--  <form action="" method="POST">
             <button type="button" class="btn btn-primary float-end"> <i class="bi bi-hand-thumbs-down"></i> </button>
           </form> -->
-          </div> -->
+          </div>
 
 
           <div class=" clearfix">
@@ -39,7 +39,7 @@
               
              
             
-             <button type="submit" value="{{post.id}}" name="post_id" class="btn btn-primary float-start" ><i class="bi bi-hand-thumbs-up" ></i> {{likes}}</button>
+             <button type="submit" value="{{post.id}}" name="post_id" class="btn btn-primary float-start m-2" ><i class="bi bi-hand-thumbs-up" ></i> {{likes}}</button>
          
              </form>
             
@@ -52,7 +52,7 @@
         
         </div>
         
-      </div>
+      
  
      <form action="" method="POST">
        {% csrf_token %}
@@ -60,12 +60,12 @@
         <label for="exampleFormControlTextarea1" class="form-label" required>Post Comment</label>
         <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3" required></textarea>
       </div>
-      {% if user.is_authenticated %}
+     <!--  {% if user.is_authenticated %} -->
       
       <button type="submit" class="btn btn-primary mb-3" > Comment</button>
-      {% else %}
+    <!--   {% else %} -->
       <button type="submit" class="btn btn-primary mb-3" disabled> Comment</button>
-      {% endif %}
+      <!-- {% endif %} -->
     </form>
 
 
@@ -93,6 +93,7 @@
 
     </div>
   </div>
+</div>
 </div>
 
 {% endblock %}
