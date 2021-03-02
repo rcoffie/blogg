@@ -23,13 +23,15 @@ def PostDetail(request, id):
   comments = Comment.objects.filter(post=post).order_by('-id')
   likes    = post.likes.count()
   context = {'post':post,'comments':comments,'likes':likes}
-  
+  user_id = request.user.id
   if request.method == 'POST':
-    
-    content = request.POST['content']
-    comment = Comment.objects.create(content=content,user=request.user,post=post)
-    comment.save()
-    return redirect('/detail/'+str(post.id))
+    if user_id is None:
+      return redirect('account:login')
+    else:
+     content = request.POST['content']
+     comment = Comment.objects.create(content=content,user=request.user,post=post)
+     comment.save()
+     return redirect('/detail/'+str(post.id))
   
       
 
