@@ -3,6 +3,7 @@ from . models import *
 from account .models import *
 from django.contrib.auth.models import User
 user = User
+from django.db.models import Q
 
 
 
@@ -62,3 +63,18 @@ def likes(request, pk):
     else:
       post.likes.add(request.user)
   return redirect('/detail/'+str(post.id))
+
+
+
+
+
+def Search(request):
+  posts = Post.objects.all()
+  query = request.GET.get('q')
+  if query:
+    posts = Post.filter(title__icontains=query)
+  context = {
+    'posts':posts,
+  }
+
+  return render(request,'post/search.html')

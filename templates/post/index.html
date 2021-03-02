@@ -4,10 +4,37 @@
 {% block content %}
 
 
-<div class="container mt-4">
-  
+
+  <div class="row">
+    <div class="col-md-8">
+
+      <div class="card mb-3">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+      
+      <form action="{% url 'post:search' %}" method="GET"> 
+        {% csrf_token %}
+      <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" / required>
+        <button type="submit" name="serach" class="btn btn-outline-primary">search</button>
+      </div>
+    </form>
+      
+    </div>
+  </div>
  
   <div class="row row-cols-1 row-cols-md-3 g-4">
+
     {% for post in posts %}
     <div class="col">
      <div class="card shadow-lg rounded"  >
@@ -32,7 +59,7 @@
     
 
   
-</div>
+
 
 
 
