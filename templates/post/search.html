@@ -1,6 +1,55 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 
 {% block content %}
+
+
+
+
+ 
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% if posts %}
+    {% for post in posts %}
+    <div class="col">
+     <div class="card shadow-lg rounded"  >
+        <img src="{{post.postImage.url}}" class="card-img-top img-fluid" style="width: auto; height: 250px;" alt="...">
+        
+        <div class="card-body">
+          <h5 class="card-title"> <a href="{% url 'post:detail'  post.id  %}"> {{post.title}} </a>  </h5>
+          <p class="card-text">{{post.body|truncatewords:20 }}</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{post.created|naturaltime }}</small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Sorry, we couldn’t find any results matching this query. !</h4>
+      
+      
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-success"> Check your spelling and try again </li>
+        <li class="list-group-item list-group-item-success"> Use a different set of search filters </li>
+        <li class="list-group-item list-group-item-success"> Try a similar but different search term, like "for loop" instead of "for" </li>
+       
+      </ul>
+    </div>
+
+    {% endif %}
+ 
+  
+ 
+  </div>
+
+ 
+    
+
+  
+
+
+
 
 {% endblock %}

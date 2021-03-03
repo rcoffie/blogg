@@ -4,14 +4,20 @@ from account .models import *
 from django.contrib.auth.models import User
 user = User
 from django.db.models import Q
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
 
 # Create your views here.
 def Home(request):
-  posts = Post.objects.all()
+  posts_list = Post.objects.all().order_by('-id')
+  paginator = Paginator(posts_list, 6)
+ 
+  page_number = request.GET.get('page')
+  posts  = paginator.get_page(page_number)
+
+ 
   context = {'posts':posts}
   return render(request,'post/index.html',context)
 
@@ -69,12 +75,17 @@ def likes(request, pk):
 
 
 def Search(request):
-  posts = Post.objects.all()
+  # posts = Post.objects.all()
   query = request.GET.get('q')
   if query:
-    posts = Post.filter(title__icontains=query)
+    posts = Post.objects.all().filter(
+      Q(title__icontains=query)|
+      Q(body__icontains=query)|
+      Q(author__username=query)
+
+      )
   context = {
     'posts':posts,
   }
 
-  return render(request,'post/search.html')
+  return render(request,'post/search.html',context)
