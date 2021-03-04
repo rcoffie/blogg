@@ -6,7 +6,7 @@
 
 
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4 ">
 
     {% for post in posts %}
     <div class="col">
@@ -24,11 +24,52 @@
     </div>
     {% endfor %}
  
-  
+
  
   </div>
 
- 
+
+  
+
+ <div class="col-md-8 m-4">
+
+  <nav aria-label="...">
+
+    <ul class="pagination">
+      {% if posts.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ posts.previous_page_number}}">Previous</a>
+      </li>
+      {% endif %}
+    
+
+      {% for p in posts.paginator.page_range %}
+      {% if posts.number == p %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+      </li>
+      {% else %}
+
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="?page={{ p }}">{{ p}}</a>
+      </li>
+
+      <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+      {% endif %}
+      {% endfor %}
+
+
+       {% if posts.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ posts.next_page_number}}">Next</a>
+      </li>
+      {% endif %}
+      
+    </ul>
+  </nav>
+   
+
+ </div>
     
 
   
