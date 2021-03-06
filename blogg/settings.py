@@ -46,7 +46,8 @@ INSTALLED_APPS = [
 
 #my apps 
     'account',
-    'post'
+    'post',
+    'super_u',
 ]
 
 
