@@ -1,13 +1,14 @@
 from django.urls import path
 from . import views 
 from django.contrib.auth import views as auth_views
+from django.conf import settings
 
 app_name = 'account'
 
 urlpatterns = [
   path('',views.registration,name='registration'),
   path('login/',views.UserLogin,name='login'),
-  path('logout/',views.logout,name='logout'),
+  path('logout/',views.logout ,name='logout'),
 
 
   # password reset
