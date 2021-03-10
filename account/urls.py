@@ -8,7 +8,7 @@ app_name = 'account'
 urlpatterns = [
   path('',views.registration,name='registration'),
   path('login/',views.UserLogin,name='login'),
-  path('logout/',views.logout ,name='logout'),
+  path('logout/',views.UserLogout ,name='logout'),
 
 
   # password reset

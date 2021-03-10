@@ -23,7 +23,7 @@ def registration(request):
 
 
 
-def logout(request):
+def UserLogout(request):
   logout(request)
   return redirect('post:home')
   
