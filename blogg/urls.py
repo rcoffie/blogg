@@ -23,5 +23,6 @@ urlpatterns = [
     path('',include('post.urls')),
     path('account/',include('account.urls')),
     path('super_u/',include('super_u.urls')),
+    path('oauth/',include('social_django.urls'),name="social")
     
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
